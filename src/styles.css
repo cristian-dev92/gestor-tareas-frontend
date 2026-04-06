@@ -1,0 +1,64 @@
+/* You can add global styles to this file, and also import other style files */
+/* Tipografía moderna */
+body {
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  background: #f3f4f6;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Reset suave */
+* {
+  box-sizing: border-box;
+}
+
+/* Botones */
+button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #1e40af;
+}
+
+button.delete {
+  background: #dc2626;
+}
+
+button.delete:hover {
+  background: #991b1b;
+}
+
+/* Inputs */
+input[type="text"], input[type="date"], select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+/* Temas */
+:root {
+  --bg: #ffffff;
+  --text: #000000;
+  --card-bg: #f5f5f5;
+}
+
+.dark-theme {
+  --bg: #121212;
+  --text: #ffffff;
+  --card-bg: #1e1e1e;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
