@@ -1,0 +1,40 @@
+<div class="profile-container" *ngIf="user">
+  <h2>👤 Mi Perfil</h2>
+
+    <div class="profile-field">
+    <label>Usuario</label>
+    <input *ngIf="editMode" [(ngModel)]="editedUsername" />
+    <p *ngIf="!editMode">{{ user.username }}</p>
+  </div>
+
+  <div class="profile-field">
+    <label>Email</label>
+    <input *ngIf="editMode" [(ngModel)]="editedEmail" />
+    <p *ngIf="!editMode">{{ user.email }}</p>
+  </div>
+
+  <div class="profile-field">
+    <label>Contraseña</label>
+
+    <div class="profile-field">
+     <input *ngIf="editMode" type="password" placeholder="Nueva contraseña"[(ngModel)]="newPassword"/>
+    </div>
+
+    <div class="profile-field password-confirm">
+     <input *ngIf="editMode" type="password"  placeholder="Confirmar contraseña"[(ngModel)]="confirmPassword"/>
+    </div>
+
+    <p *ngIf="!editMode">********</p>
+  </div>
+
+  <div class="profile-actions">
+    <button *ngIf="!editMode" (click)="editMode = true">Editar</button>
+
+    <div *ngIf="editMode">
+      <button (click)="saveChanges()">Guardar</button>
+      <button (click)="cancel()">Cancelar</button>
+    </div>
+  </div>
+
+  <button class="logout-btn" routerLink="/login">Cerrar sesión</button>
+</div>
