@@ -1,7 +1,9 @@
 # TaskFlow – Frontend (Angular)
 
 Aplicación de gestión de tareas con Angular y Spring Boot. Incluye autenticación, perfil de usuario, CRUD de tareas y diseño UI profesional.
+
 TaskFlow es una aplicación moderna de gestión de tareas diseñada para ofrecer una experiencia rápida, intuitiva y visualmente fácil para todos.  
+
 Este repositorio contiene el frontend desarrollado con **Angular**, totalmente integrado con un backend en **Spring Boot**.
 
 ---
