@@ -1,0 +1,55 @@
+<div class="task-card" cdkDrag>
+
+  <!-- HANDLE PARA ARRASTRAR -->
+  <div class="drag-handle" cdkDragHandle>☰</div>
+
+  <input 
+    type="checkbox" 
+    [checked]="task.status === 'DONE'"
+    (change)="onToggleTask()"
+  >
+
+  <strong>{{ task.title }}</strong>
+  <p>{{ task.description }}</p>
+
+  <small>Creada: {{ task.createdAt | date:'short' }}</small>
+
+  <div *ngIf="task.deadline">
+    Vence: {{ task.deadline | date:'shortDate' }}
+  </div>
+
+  <span class="priority" [ngClass]="task.priority.toLowerCase()">
+    {{ translatePriority(task.priority) }}
+  </span>
+  
+  <span class="category-tag" [ngClass]="task.category">
+    {{ task.category }}
+  </span>
+  
+  <!-- SUBTAREAS -->
+  <ul *ngIf="task.subtasks?.length > 0">
+    <li *ngFor="let sub of task.subtasks">
+      <input 
+        type="checkbox" 
+        [checked]="sub.done" 
+        (change)="onToggleSub(sub)"
+      >
+      {{ sub.title }}
+      <button class="delete-sub-btn" (click)="onDeleteSub(sub.id)">x</button>
+    </li>
+  </ul>
+
+  <!-- AÑADIR SUBTAREA -->
+  <div class="add-subtask">
+    <input 
+      type="text" 
+      placeholder="Nueva subtarea..."
+      [(ngModel)]="newSubtaskText"
+    >
+    <button (click)="onAddSubtask()">Añadir</button>
+  </div>
+
+  <button (click)="onEditTask()">Editar</button>
+  <button class="delete" (click)="onDeleteTask()">Eliminar</button>
+
+</div>

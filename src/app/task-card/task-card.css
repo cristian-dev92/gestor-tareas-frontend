@@ -1,0 +1,148 @@
+.task-card {
+  width: 100%;
+  background: var(--card-bg);
+  color: var(--text);
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+  border: 1px solid #e5e7eb;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.task-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+.task-card strong {
+  font-size: 16px;
+  color: #111827;
+}
+
+.task-card p {
+  margin: 4px 0 8px;
+  color: #4b5563;
+}
+
+.task-card small {
+  color: #6b7280;
+}
+
+.add-subtask {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.subtasks li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.add-subtask input {
+  flex: 1;
+}
+
+.add-subtask button {
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+/* Contenedor de meta info */
+.meta {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* Etiqueta de prioridad */
+.priority {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.priority.high {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.priority.medium {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.priority.low {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.category-tag {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+  margin-top: 6px;
+}
+
+.category-tag.Trabajo {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.category-tag.Personal {
+  background: #fce7f3;
+  color: #9d174d;
+}
+
+.category-tag.Estudios {
+  background: #ede9fe;
+  color: #5b21b6;
+}
+
+.category-tag.Urgente {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.drag-handle {
+  cursor: grab;
+  font-size: 18px;
+  padding: 4px;
+  opacity: 0.6;
+  user-select: none;
+}
+
+.drag-handle:hover {
+  opacity: 1;
+}
+
+/* TÍTULO DE LA TAREA */
+:host-context(.dark-theme) .task-card strong {
+  color: var(--text-primary);
+}
+
+/* DESCRIPCIÓN DE LA TAREA */
+:host-context(.dark-theme) .task-card p {
+  color: var(--text-secondary);
+}
+
+/* SUBTAREAS */
+.delete-sub-btn {
+  color: #ffffff; /* rojo profesional */
+  font-weight: bold;
+  cursor: pointer;
+  background: #be123c;
+  border: none;
+  font-size: 12px;
+}
+
+.delete-sub-btn:hover {
+  color: #be123c; /* rojo más oscuro */
+}
