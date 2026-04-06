@@ -1,0 +1,33 @@
+  <div class="login-page">
+
+   <div class="login-card">
+
+    <!-- Logo / Marca -->
+    <div class="login-logo">TaskFlow</div>
+    <div class="login-subtitle">Organiza tu día como tu quieras</div>
+
+    <h2>Iniciar Sesión</h2>
+
+  <form (ngSubmit)="onLogin()">
+
+    <label>Usuario</label>
+    <input type="text" [(ngModel)]="username" name="username" required>
+
+    <label>Contraseña</label>
+    <input type="password" [(ngModel)]="password" name="password" required>
+
+    <button type="submit">Entrar</button>
+
+    @if (errormessage) {
+    <p class="error">{{ errormessage }}</p>
+}
+
+  </form>
+  
+  <!-- Enlace para registrarse -->
+    <p class="login-register">
+      ¿No tienes cuenta?
+      <a routerLink="/register">Regístrate aquí</a>
+    </p>
+
+</div>

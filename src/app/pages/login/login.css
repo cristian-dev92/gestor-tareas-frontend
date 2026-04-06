@@ -1,0 +1,86 @@
+/* 🌙 Fondo general */
+.login-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #495464;
+  color: #E6EDF3;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Tarjeta */
+.login-card {
+  width: 420px;
+  padding: 32px;
+  background: #161B22;
+  border-radius: 12px;
+  border: 1px solid #30363D;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  text-align: center;
+}
+
+/* Logo */
+.login-logo {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #3B82F6;
+}
+
+/* Subtítulo */
+.login-subtitle {
+  color: #8B949E;
+  margin-bottom: 24px;
+}
+
+/* Inputs */
+.login-card input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: 1px solid #30363D;
+  background: #0D1117;
+  color: #E6EDF3;
+  transition: 0.2s ease;
+}
+
+.login-card input:focus {
+  border-color: #3B82F6;
+  outline: none;
+}
+
+/* Botón */
+.login-card button {
+  width: 100%;
+  padding: 12px;
+  background: #7c00f0;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.login-card button:hover {
+  background: #60A5FA;
+}
+
+/* Enlace registro */
+.login-register {
+  margin-top: 16px;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.login-register a {
+  color: #3B82F6;
+  text-decoration: none;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
