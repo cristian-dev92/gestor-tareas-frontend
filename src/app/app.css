@@ -1,0 +1,37 @@
+/* 🌙 MODO OSCURO */
+.dark-theme {
+  --bg-primary: #1e1f22;
+  --bg-secondary: #2a2b2f;
+  --bg-hover: #3a3b40;
+
+  --text-primary: #ffffff;
+  --text-secondary: #c7c7c7;
+
+  --border-color: #3c3d42;
+
+  --accent: #4c8dff;
+}
+
+/* 🎨 VARIABLES GLOBALES */
+:root {
+  --topbar-bg: #1e1e1e;
+  --topbar-text: #ffffff;
+
+  --btn-bg: #007bff;
+  --btn-bg-hover: #005fcc;
+  --btn-text: #4413cc;
+
+  --border-color: #333;
+
+  --bg-primary: #c1bfca;
+  --bg-secondary: #afb2bd;
+  --text-primary: #000000;
+}
+
+/* Estilos globales */
+body {
+  margin: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: sans-serif;
+}
