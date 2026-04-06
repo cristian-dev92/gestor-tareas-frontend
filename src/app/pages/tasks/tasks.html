@@ -1,0 +1,154 @@
+<div class="tasks-container">
+
+  <!-- FORMULARIO DE NUEVA TAREA -->
+  <div class="task-form">
+    <h3>Crear nueva tarea</h3>
+
+    <input
+      type="text"
+      placeholder="Título de la tarea..."
+      [(ngModel)]="newTaskTitle"
+      name="title"
+    >
+
+    <textarea
+      placeholder="Descripción..."
+      [(ngModel)]="newTaskDescription"
+      name="description"
+    ></textarea>
+
+    <input 
+      type="date" 
+      [(ngModel)]="newTaskDeadline"
+      name="deadline"
+    >
+
+    <select [(ngModel)]="newTaskPriority">
+      <option value="HIGH">Alta</option>
+      <option value="MEDIUM">Media</option>
+      <option value="LOW">Baja</option>
+    </select>
+
+    <select [(ngModel)]="newTaskCategory" name="category">
+      <option value="">Sin categoría</option>
+      <option value="Trabajo">Trabajo</option>
+      <option value="Personal">Personal</option>
+      <option value="Estudios">Estudios</option>
+      <option value="Urgente">Urgente</option>
+    </select>
+
+    <button (click)="addTask()">Añadir tarea</button>
+  </div>
+
+  <!-- BUSCADOR -->
+  <div class="search-container">
+   <div class="search-box">
+    🔍
+    <input 
+      type="text" 
+      placeholder="Buscar..." 
+      [(ngModel)]="searchText"
+      name="search"
+    >
+   </div>
+  </div>
+
+  <!-- KANBAN -->
+  <div id="kanban-section" class="kanban">
+
+    <!-- PENDIENTES -->
+    <div id="pending-column" class="column task-list"
+         #pendingListDiv
+         cdkDropList
+         #pendingList="cdkDropList"
+         [cdkDropListData]="pendingTasks"
+         [cdkDropListConnectedTo]="[doneList]"
+         (cdkDropListDropped)="drop($event, 'PENDING')"
+        >
+
+      <h3>📝 Pendientes<span class="count">{{ pendingTasks.length }}</span></h3>
+
+      <app-task-card
+        class="task-card"
+        *ngFor="let task of pendingTasks
+        .filter(t => currentFilter === 'ALL' || currentFilter === 'PENDING')
+        .filter(t => t.title.toLowerCase().includes(searchText.toLowerCase()) 
+            || t.description.toLowerCase().includes(searchText.toLowerCase())
+            || t.category?.toLowerCase().includes(searchText.toLowerCase())
+            || t.priority.toLowerCase().includes(searchText.toLowerCase())
+            )"
+        cdkDrag    
+        [task]="task"
+        (cdkDragMoved)="scrollOnDrag($event, pendingListDiv)"
+        (toggleTask)="toggleTask($event)"
+        (toggleSubtask)="toggleSubtask($event)"
+        (deleteTask)="deleteTask($event)"
+        (deleteSubtask)="deleteSubtask($event)"
+        (editTask)="startEdit($event)"
+        (addSubtask)="addSubtaskFromCard($event)"
+      ></app-task-card>
+    </div>
+
+    <!-- COMPLETADAS -->
+    <div id="done-column" class="column task-list"
+         #doneListDiv
+         cdkDropList
+         #doneList="cdkDropList"
+         [cdkDropListData]="doneTasks"
+         [cdkDropListConnectedTo]="[pendingList]"
+         (cdkDropListDropped)="drop($event, 'DONE')"
+         >
+
+      <h3>✅ Completadas<span class="count">{{ doneTasks.length }}</span></h3>
+
+      <app-task-card
+        class="task-card"
+        *ngFor="let task of doneTasks
+        .filter(t => currentFilter === 'ALL' || currentFilter === 'DONE')
+        .filter(t => t.title.toLowerCase().includes(searchText.toLowerCase()) 
+            || t.description.toLowerCase().includes(searchText.toLowerCase()) 
+            || t.category?.toLowerCase().includes(searchText.toLowerCase()) 
+            || t.priority.toLowerCase().includes(searchText.toLowerCase())
+            )"  
+        cdkDrag
+        (cdkDragMoved)="scrollOnDrag($event, doneListDiv)"
+        [task]="task"
+        (toggleTask)="toggleTask($event)"
+        (toggleSubtask)="toggleSubtask($event)"
+        (deleteTask)="deleteTask($event)"
+        (deleteSubtask)="deleteSubtask($event)"
+        (editTask)="startEdit($event)"
+        (addSubtask)="addSubtaskFromCard($event)"
+      ></app-task-card>
+    </div>
+
+  </div>
+
+  <!-- EDITAR TAREA -->
+  <div *ngIf="editingTask" class="edit-box">
+    <h3>Editar tarea</h3>
+
+    <input [(ngModel)]="editingTask.title" placeholder="Título" />
+    <input [(ngModel)]="editingTask.description" placeholder="Descripción" />
+
+    <select [(ngModel)]="editingTask.priority">
+      <option value="HIGH">Alta</option>
+      <option value="MEDIUM">Media</option>
+      <option value="LOW">Baja</option>
+    </select>
+
+    <select [(ngModel)]="editingTask.category">
+      <option value="">Sin categoría</option>
+      <option value="Trabajo">Trabajo</option>
+      <option value="Personal">Personal</option>
+      <option value="Estudios">Estudios</option>
+      <option value="Urgente">Urgente</option>
+    </select>
+
+    <button (click)="updateTask(editingTask)">Guardar</button>
+    <button class="delete" (click)="cancelEdit()">Cancelar</button>
+  </div>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+</div>

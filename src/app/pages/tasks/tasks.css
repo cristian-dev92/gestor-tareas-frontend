@@ -1,0 +1,294 @@
+/* CONTENEDOR DEL FORMULARIO */
+.task-form {
+  width: 100%;
+  max-width: 900px; /* ancho profesional */
+  margin: 0 auto 30px auto; /* centrado */
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* INPUTS GRANDES */
+.task-form input,
+.task-form textarea,
+.task-form select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+}
+
+/* TEXTAREA MÁS ALTA */
+.task-form textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+/* BOTÓN */
+.task-form button {
+  align-self: flex-end;
+  padding: 10px 18px;
+  font-size: 15px;
+}
+
+/* CUADRO DE BÚSQUEDA */
+.search-container {
+  width: 100%;
+  max-width: 900px; /* mismo ancho que el formulario */
+  margin: 0 auto 20px auto; /* centrado */
+}
+
+.search-box {
+  background: #ffffff;
+  padding: 12px 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #e5e7eb;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+/* CONTENEDOR DEL KANBAN */
+.kanban {
+  display: flex;
+  gap: 40px;
+  padding: 20px;
+  justify-content: center; /* centra las columnas */
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+/* CADA COLUMNA */
+.column {
+  width: 480px; /* ANCHURA PROFESIONAL */
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border: 1px solid #e5e7eb;
+  max-height: none; /* para que no limite la altura */
+  overflow-y: visible; /* para que se expanda con las tareas */
+  scroll-behavior: smooth;
+}
+
+/* TÍTULO DE LA COLUMNA */
+.column h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f3f4f6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* CONTADOR DE TAREAS */
+.count {
+  background: #e5e7eb;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* CONTENEDOR DE LOS FILTROS */
+.filters-container {
+  width: 100%;
+  max-width: 900px; /* mismo ancho que el formulario y la barra de búsqueda */
+  margin: 0 auto 20px auto; /* centrado */
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap; /* por si la pantalla es pequeña */
+}
+
+.filters button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #a01394;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s ease, transform 0.1s ease, color 0.2s ease;
+}
+
+.filters button:hover {
+  background: #f3f4f6;
+  transform: translateY(-2px);
+}
+
+/* Tarjeta mientras la arrastras */
+.cdk-drag-preview {
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  border-radius: 8px;
+  transform: rotate(2deg) scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+/* Hueco donde va a caer */
+.cdk-drag-placeholder {
+  opacity: 1 !important;
+  background: rgba(0, 0, 0, 0.06);
+  border: 2px dashed rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  height: 60px; /* ajusta según tu tarjeta */
+  margin: 8px 0;
+  transition: all 0.2s ease;
+}
+
+/* Animación al volver a su sitio */
+.cdk-drag-animating {
+  transition: transform 250ms ease;
+}
+
+/* Suavidad entre tarjetas */
+.task-list.cdk-drop-list-dragging .task-card:not(.cdk-drag-placeholder) {
+  transition: transform 250ms ease;
+}
+
+/* Efecto al arrastrar dentro de una columna */
+.task-list.cdk-drop-list-dragging .task-card {
+  opacity: 0.9;
+  transform: scale(0.98);
+}
+
+/* Suavidad general de las tarjetas */
+.task-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.left, .right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.nav-btn, .icon-btn, .create-btn {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: var(--btn-bg);
+  color: var(--text);
+  transition: 0.2s;
+}
+
+.nav-btn:hover,
+.icon-btn:hover,
+.create-btn:hover {
+  background: var(--btn-hover);
+}
+
+.create-btn {
+  background: var(--accent);
+  color: white;
+}
+
+.create-btn:hover {
+  opacity: 0.9;
+}
+
+/* FORMULARIO */
+:host-context(.dark-theme) .task-form {
+  background: #1e1f22;
+  border: 1px solid #3c3d42;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+:host-context(.dark-theme) .task-form h3 {
+  color: #ffffff;
+}
+
+:host-context(.dark-theme) .task-form input,
+:host-context(.dark-theme) .task-form textarea,
+:host-context(.dark-theme) .task-form select {
+  background: #2a2b2f;
+  color: #ffffff;
+  border: 1px solid #3c3d42;
+}
+
+:host-context(.dark-theme) .task-form input::placeholder,
+:host-context(.dark-theme) .task-form textarea::placeholder {
+  color: #b5b5b5;
+}
+
+/* BUSCADOR */
+:host-context(.dark-theme) .search-box {
+  background: #2a2b2f;
+  border: 1px solid #3c3d42;
+  color: white;
+}
+
+:host-context(.dark-theme) .search-box input {
+  background: transparent;
+  color: white;
+}
+
+:host-context(.dark-theme) .search-box input::placeholder {
+  color: #b5b5b5;
+}
+
+/* KANBAN */
+:host-context(.dark-theme) .kanban .column {
+  background: #1e1f22;
+  border: 1px solid #3c3d42;
+  border-radius: 8px;
+}
+
+:host-context(.dark-theme) .kanban h3 {
+  color: #ffffff;
+}
+
+:host-context(.dark-theme) .task-card {
+  background: #2a2b2f;
+  border: 1px solid #3c3d42;
+  color: white;
+}
+
+:host-context(.dark-theme) .task-card:hover {
+  background: #34353a;
+}
