@@ -1,0 +1,112 @@
+/* 🌙 Fondo general */
+.register-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #747d8a;
+  color: #E6EDF3;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Tarjeta */
+.register-container {
+  width: 420px;
+  padding: 32px;
+  background: #161B22;
+  border-radius: 12px;
+  border: 1px solid #30363D;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* Título */
+.register-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #E6EDF3;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Logo */
+.register-logo {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #3B82F6;
+  display: block;
+  text-align: center;
+}
+
+/* Subtítulo */
+.register-subtitle {
+  color: #8B949E;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  display: block;
+  text-align: center;
+}
+
+/* Formulario */
+.register-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Labels */
+.register-container label {
+  font-size: 0.9rem;
+  color: #8B949E;
+}
+
+/* Inputs */
+.register-container input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #30363D;
+  background: #0D1117;
+  color: #E6EDF3;
+  transition: 0.2s ease;
+}
+
+.register-container input:focus {
+  border-color: #3B82F6;
+  outline: none;
+}
+
+/* Botón */
+.register-container button {
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #8b00fd;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.register-container button:hover {
+  background-color: #60A5FA;
+}
+
+/* Mensajes */
+.success {
+  color: #34D399;
+  margin-top: 10px;
+}
+
+.error {
+  color: #F87171;
+  margin-top: 10px;
+}
+
+/* Enlace a login */
+.register-login a {
+  color: #3B82F6;
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto;
+}
