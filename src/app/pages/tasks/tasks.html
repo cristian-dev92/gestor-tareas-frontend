@@ -1,5 +1,13 @@
 <div class="tasks-container">
 
+  <!--MENSAJE DE SERVIDOR LENTO -->
+   @if (loading() && showSlowServerMessage()) {
+  <div class="alert alert-info">
+    🚀 <strong>Nota:</strong> El servidor de Render está "despertando". 
+    La primera carga puede tardar unos 30-60 segundos. ¡Gracias por esperar!
+  </div>
+  }
+
   <!-- FORMULARIO DE NUEVA TAREA -->
   <div class="task-form">
     <h3>Crear nueva tarea</h3>

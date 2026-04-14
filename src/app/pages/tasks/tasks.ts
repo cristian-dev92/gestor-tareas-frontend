@@ -6,6 +6,7 @@ import { TaskCardComponent } from '../../task-card/task-card';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDragMove } from '@angular/cdk/drag-drop';
 import { ActivatedRoute } from '@angular/router';
+import { signal } from '@angular/core';
 
 
 @Component({
@@ -30,7 +31,13 @@ export class Tasks implements AfterViewInit {
   searchText: string = ''; // Nueva propiedad para el texto de búsqueda
   newSubtask: any = {}; // Nueva propiedad para la subtarea
   currentFilter: string = 'ALL'; // Nueva propiedad para el filtro actual
+  loading = signal(true);
+  SlowServerMessage = signal(false);
 
+  showSlowServerMessage() {
+  return this.SlowServerMessage();
+ }
+  
   constructor(private taskService: TaskService, private route: ActivatedRoute) {}
 
    ngAfterViewInit() {
@@ -40,10 +47,10 @@ export class Tasks implements AfterViewInit {
     }
   }
 
-
+  
   ngOnInit() {
      // Scroll automático si hay fragmento (#kanban-section)
-  this.route.fragment.subscribe(fragment => {
+    this.route.fragment.subscribe(fragment => {
     if (fragment) {
       const element = document.getElementById(fragment);
       if (element) {
@@ -51,6 +58,16 @@ export class Tasks implements AfterViewInit {
       }
     }
   });
+     // Activar loading
+      this.loading.set(true);
+
+     // Mostrar mensaje si Render tarda más de 2.5s en despertar
+      setTimeout(() => {
+       if (this.loading()) {
+        this.SlowServerMessage.set(true);
+      }
+    }, 2500);
+
 
   // Tu código original para cargar tareas
     this.loadTasks();
