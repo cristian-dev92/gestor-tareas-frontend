@@ -66,7 +66,7 @@ export class Tasks implements AfterViewInit {
        if (this.loading()) {
         this.SlowServerMessage.set(true);
       }
-    }, 2500);
+    }, 5000);
 
 
   // Tu código original para cargar tareas
@@ -75,10 +75,15 @@ export class Tasks implements AfterViewInit {
 
   // Carga las tareas desde el servicio y las ordena por fecha de creación (más recientes primero)
   loadTasks() { 
+    this.loading.set(true); // Desactivar loading al recibir respuesta (éxito o error)
+
     this.taskService.getTasks().subscribe({
       next: (data) => {
         console.log("TAREAS RECIBIDAS:", data);  // ← AÑADE ESTO
         this.tasks = data;
+        this.loading.set(false); // Desactivar loading al recibir respuesta (éxito o error)
+        this.SlowServerMessage.set(false); // <-- Añade esto para ocultar el aviso si ya hay datos
+        
 
       // 🔥 sincronizar columnas
       this.pendingTasks = this.tasks.filter(t => t.status === 'PENDING');
@@ -86,6 +91,8 @@ export class Tasks implements AfterViewInit {
       },
       error: () => {
         this.errorMessage = 'No se pudieron cargar las tareas.';
+        this.loading.set(false); // Desactivar loading al recibir respuesta (éxito o error)
+        this.SlowServerMessage.set(false); // <-- Añade esto para ocultar el aviso en caso de error
       }
     });
   }
