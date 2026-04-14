@@ -16,7 +16,7 @@ import { signal } from '@angular/core';
   templateUrl: './tasks.html',
   styleUrl: './tasks.css'
 })
-export class Tasks implements AfterViewInit {
+export class Tasks {
 
   tasks: any[] = []; // Lista de tareas completa
   pendingTasks: any[] = []; // Nueva propiedad para tareas pendientes
@@ -39,14 +39,6 @@ export class Tasks implements AfterViewInit {
  }
   
   constructor(private taskService: TaskService, private route: ActivatedRoute) {}
-
-   ngAfterViewInit() {
-    const el = document.getElementById('pending-column');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
-
   
   ngOnInit() {
      // Scroll automático si hay fragmento (#kanban-section)

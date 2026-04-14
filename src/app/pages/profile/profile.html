@@ -28,11 +28,11 @@
   </div>
 
   <div class="profile-actions">
-    <button *ngIf="!editMode" (click)="editMode = true">Editar</button>
+    <button *ngIf="!editMode" class="btn-edit" (click)="editMode = true">Editar</button>
 
-    <div *ngIf="editMode">
-      <button (click)="saveChanges()">Guardar</button>
-      <button (click)="cancel()">Cancelar</button>
+    <div *ngIf="editMode" class="edit-buttons-container">
+      <button class="btn-save" (click)="saveChanges()">Guardar</button>
+      <button class="btn-cancel" (click)="cancel()">Cancelar</button>
     </div>
   </div>
 

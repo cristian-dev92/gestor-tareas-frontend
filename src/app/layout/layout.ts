@@ -1,5 +1,6 @@
 import { Component, signal, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-layout',
@@ -28,15 +29,20 @@ export class Layout implements OnInit {
     window.location.href = '/login';
   }
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private cdr: ChangeDetectorRef) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 
   goHome() {
   this.router.navigate(['/tasks']).then(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 0);
+    this.cdr.detectChanges();
   });
-}
+ }
   
-goToTasks() {
+  goToTasks() {
   if (this.router.url === '/tasks') {
     // Ya estamos en tasks → bajar directamente a Pendientes
     document.getElementById('pending-column')
@@ -49,7 +55,14 @@ goToTasks() {
           ?.scrollIntoView({ behavior: 'smooth' });
       }, 50);
     });
+    this.cdr.detectChanges();
   }
  }
- 
+
+  goToProfile() {
+  this.router.navigate(['/profile']).then(() => {
+    this.cdr.detectChanges();
+  });
+}
+
 }

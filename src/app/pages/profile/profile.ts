@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { AuthService } from '../../services/auth';
 import { FormsModule } from '@angular/forms';
 
@@ -23,11 +23,20 @@ export class Profile implements OnInit {
   newPassword = '';
   confirmPassword = '';
 
-  constructor(private authservice: AuthService) {}
+  constructor(private authservice: AuthService, 
+    private router: Router, 
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.loadUser();
-  }
+
+  this.router.events.subscribe(event => {
+    if (event instanceof NavigationEnd && event.urlAfterRedirects === '/profile') {
+      this.loadUser();
+    }
+  });
+}
 
   loadUser() {
     this.authservice.getCurrentUser().subscribe({
@@ -38,6 +47,9 @@ export class Profile implements OnInit {
         // Inicializamos los campos editables
         this.editedUsername = this.user.username;
         this.editedEmail = this.user.email;
+
+        //¡FORZAR DETECCIÓN DE CAMBIOS AQUÍ!
+        this.cdr.detectChanges();
       },
       error: () => console.error('No se pudo cargar el perfil')
     });
@@ -78,18 +90,21 @@ export class Profile implements OnInit {
     this.authservice.updateUser(updatedUser).subscribe({
         next: (response: any) => {
 
-        // ⭐ Guardar el nuevo token que devuelve el backend
+        //Guardar el nuevo token que devuelve el backend
         this.authservice.saveToken(response.token);
 
-        // ⭐ Actualizar el usuario en Angular
+        //Actualizar el usuario en Angular
         this.user = response.user;
 
-        // ⭐ Salir del modo edición
+        //Salir del modo edición
        this.editMode = false;
 
-        // ⭐ Limpiar campos
+        //Limpiar campos
         this.newPassword = '';
         this.confirmPassword = '';
+
+        //Forzar refresco tras actualizar
+        this.cdr.detectChanges();
        },
       error: () => alert("No se pudo actualizar el perfil")
     });

@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withRouterConfig } from '@angular/router';
 import { provideHttpClient,withInterceptorsFromDi,HTTP_INTERCEPTORS} from '@angular/common/http';
 import { routes } from './app.routes';
 import { AuthInterceptor } from './auth.interceptor';
@@ -8,8 +8,16 @@ import { AuthInterceptor } from './auth.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
+
+    provideRouter(
+      routes,
+      withRouterConfig({
+        onSameUrlNavigation: 'reload'
+      })
+    ),
+
     provideHttpClient(withInterceptorsFromDi()),
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

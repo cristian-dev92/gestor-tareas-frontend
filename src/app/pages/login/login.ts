@@ -27,8 +27,10 @@ export class Login {
     this.authService.login(credentials).subscribe({
       next: (response) => {
         this.authService.saveToken(response.token);
-        this.router.navigate(['/tasks']);
-      },
+        this.router.navigate(['/tasks']).then(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    },
       error: () => {
         this.errormessage = 'Username or password is incorrect. Please try again.';
       }
