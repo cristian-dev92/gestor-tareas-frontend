@@ -8,6 +8,27 @@
   </div>
 
   <div class="right">
+    <div class="notif-bell" (click)="togglePanel()">
+      <span class="bell-icon">🔔</span>
+      @if (notifService.urgentCount() > 0) {
+        <span class="badge">{{ notifService.urgentCount() }}</span>
+      }
+
+      @if (showPanel() && notifService.urgentCount() > 0) {
+        <div class="notif-dropdown" (click)="$event.stopPropagation()">
+          <p class="notif-title">Tareas próximas a vencer:</p>
+
+          <ul>
+            @for (taskName of notifService.notifications(); track $index) {
+              <li class="notif-item">
+                <span class="bullet">•</span> {{ taskName }}
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+
     <button class="icon-btn" (click)="toggleTheme()">
       {{ theme() === 'light' ? '🌙 Oscuro' : '☀️ Claro' }}
     </button>
@@ -19,3 +40,14 @@
 <div class="content">
   <router-outlet></router-outlet>
 </div>
+
+@if (showToast() && notifService.urgentCount() > 0) {
+  <div class="toast-card">
+    <div class="toast-icon">⏳</div>
+    <div class="toast-body">
+      <strong>Tareas urgentes</strong>
+      <p>Tienes {{ notifService.urgentCount() }} tareas venciendo pronto.</p>
+    </div>
+    <button class="close-toast" (click)="closeToast()">×</button>
+  </div>
+}

@@ -1,2 +1,32 @@
-<h1>Bienvenido a TaskFlow</h1>
-<p>Selecciona una opción del menú para empezar.</p>
+<div class="home-wrapper">
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="logo-title">Task<span>Flow</span></h1>
+      <p class="tagline">Organiza tu vida. <br> Una tarea a la vez.</p>
+      <p class="description">
+        La herramienta definitiva para gestionar tus proyectos personales con simplicidad y eficiencia. 
+        Crea, organiza y completa tus objetivos diarios.
+      </p>
+
+      <div class="home-actions">
+        <button class="btn-primary" routerLink="/login">Iniciar Sesión</button>
+        <button class="btn-secondary" routerLink="/register">Registrarse</button>
+      </div>
+
+      <div class="server-status" *ngIf="loading() && showSlowServerMessage()">
+        <div class="spinner"></div>
+        <p>Preparando tu entorno... El servidor de Render está despertando (puede tardar 30-60s).</p>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <div class="floating-card task-1">📅 Reunión de equipo</div>
+      <div class="floating-card task-2">📧 Revisar correos</div>
+      <div class="floating-card task-3">✅ Proyecto completado</div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 TaskFlow. Proyecto Demo para Portafolio.</p>
+  </footer>
+</div>

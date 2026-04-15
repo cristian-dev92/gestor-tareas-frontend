@@ -20,6 +20,7 @@ export class TaskCardComponent {
   @Output() deleteSubtask = new EventEmitter<number>();
   @Output() editTask = new EventEmitter<any>();
   @Output() addSubtask = new EventEmitter<{ task: any, title: string }>();
+  @Input() isOverdue: boolean = false; // Solo la variable, sin la función aquí
 
 
   newSubtaskText: string = '';

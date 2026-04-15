@@ -33,6 +33,7 @@ export class Register {
 
     this.authService.register(newUser).subscribe({
       next: () => {
+        localStorage.clear(); // Limpiamos por si acaso hay basura de otra sesión
         this.successMessage = 'Usuario registrado correctamente. Ahora puedes iniciar sesión.';
         // Opcional: redirigir automáticamente al login después de unos segundos
         setTimeout(() => {

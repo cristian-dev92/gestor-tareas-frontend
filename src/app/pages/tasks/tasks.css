@@ -19,7 +19,7 @@
   width: 100%;
   padding: 12px;
   border-radius: 8px;
-  border: 1px solid #d1d5db;
+  border: 1px solid #000000;
   font-size: 15px;
 }
 
@@ -94,7 +94,7 @@
   margin: 0;
   font-size: 20px;
   font-weight: 600;
-  color: #111827;
+  color: #080b13;
   padding-bottom: 10px;
   border-bottom: 2px solid #f3f4f6;
   display: flex;
@@ -181,6 +181,25 @@
 /* Suavidad general de las tarjetas */
 .task-card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* TARJETA DE TAREA (TASK-CARD) */
+.task-card strong {
+  font-size: 16px;
+  color: #000000 !important; /* Título de la tarea en negro */
+  font-weight: 700;
+}
+
+.task-card p {
+  margin: 4px 0 8px;
+  color: #111827 !important; /* Descripción en negro casi puro */
+  opacity: 1;
+}
+
+.task-card small {
+  color: #000000 !important; /* Fecha y hora en negro */
+  font-weight: 500;
+  opacity: 0.9;
 }
 
 .topbar {
@@ -278,8 +297,8 @@
 
 /* KANBAN */
 :host-context(.dark-theme) .kanban .column {
-  background: #1e1f22;
-  border: 1px solid #3c3d42;
+  background: #6b6d74;
+  border: 1px solid #7e7f86;
   border-radius: 8px;
 }
 
@@ -288,11 +307,35 @@
 }
 
 :host-context(.dark-theme) .task-card {
-  background: #2a2b2f;
-  border: 1px solid #3c3d42;
+  background: #4c4f58;
+  border: 1px solid #81828a;
   color: white;
 }
 
 :host-context(.dark-theme) .task-card:hover {
-  background: #34353a;
+  background: #a4a5a8;
+}
+
+/* Texto de la fecha en rojo */
+.overdue-text {
+  color: #ff4757 !important;
+  font-weight: bold;
+}
+
+/* Etiqueta parpadeante */
+.overdue-badge {
+  background: #ff4757;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: bold;
+  margin-left: 8px;
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
 }

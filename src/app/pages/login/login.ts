@@ -26,6 +26,7 @@ export class Login {
 
     this.authService.login(credentials).subscribe({
       next: (response) => {
+        localStorage.clear(); //Borra el token viejo antes de intentar generar uno nuevo
         this.authService.saveToken(response.token);
         this.router.navigate(['/tasks']).then(() => {
           window.scrollTo({ top: 0, behavior: 'smooth' });

@@ -1,12 +1,12 @@
 <div class="tasks-container">
 
-  <!--MENSAJE DE SERVIDOR LENTO -->
-   @if (loading() && showSlowServerMessage()) {
-  <div class="alert alert-info">
-    🚀 <strong>Nota:</strong> El servidor de Render está "despertando". 
-    La primera carga puede tardar unos 30-60 segundos. ¡Gracias por esperar!
+  <!-- MENSAJE DE SERVIDOR -->
+   @if (loading()) {
+  <div class="mini-loader">
+    <div class="spinner-sm"></div>
+    <span>Cargando tus tareas...</span>
   </div>
-  }
+}
 
   <!-- FORMULARIO DE NUEVA TAREA -->
   <div class="task-form">
@@ -87,6 +87,7 @@
             )"
         cdkDrag    
         [task]="task"
+        [isOverdue]="checkIfOverdue(task.deadline)"
         (cdkDragMoved)="scrollOnDrag($event, pendingListDiv)"
         (toggleTask)="toggleTask($event)"
         (toggleSubtask)="toggleSubtask($event)"
@@ -121,6 +122,7 @@
         cdkDrag
         (cdkDragMoved)="scrollOnDrag($event, doneListDiv)"
         [task]="task"
+        [isOverdue]="false"
         (toggleTask)="toggleTask($event)"
         (toggleSubtask)="toggleSubtask($event)"
         (deleteTask)="deleteTask($event)"

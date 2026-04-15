@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TaskService } from '../../services/task';
@@ -7,6 +7,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDragMove } from '@angular/cdk/drag-drop';
 import { ActivatedRoute } from '@angular/router';
 import { signal } from '@angular/core';
+import { NotificationService } from '../../services/notification';
 
 
 @Component({
@@ -31,35 +32,26 @@ export class Tasks {
   searchText: string = ''; // Nueva propiedad para el texto de búsqueda
   newSubtask: any = {}; // Nueva propiedad para la subtarea
   currentFilter: string = 'ALL'; // Nueva propiedad para el filtro actual
-  loading = signal(true);
-  SlowServerMessage = signal(false);
 
-  showSlowServerMessage() {
-  return this.SlowServerMessage();
- }
+  // Mantenemos el loading para el estado de la UI, pero quitamos SlowServerMessage
+  loading = signal(true);
   
-  constructor(private taskService: TaskService, private route: ActivatedRoute) {}
+  constructor(private taskService: TaskService, 
+    private route: ActivatedRoute,
+    private notifService: NotificationService) {}
   
   ngOnInit() {
      // Scroll automático si hay fragmento (#kanban-section)
     this.route.fragment.subscribe(fragment => {
     if (fragment) {
-      const element = document.getElementById(fragment);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      setTimeout(() => { // Un pequeño delay asegura que los datos ya se pintaron
+        const element = document.getElementById(fragment);
+        if (element) { element.scrollIntoView({ behavior: 'smooth' }); }
+      }, 500);
     }
   });
      // Activar loading
       this.loading.set(true);
-
-     // Mostrar mensaje si Render tarda más de 2.5s en despertar
-      setTimeout(() => {
-       if (this.loading()) {
-        this.SlowServerMessage.set(true);
-      }
-    }, 5000);
-
 
   // Tu código original para cargar tareas
     this.loadTasks();
@@ -73,21 +65,23 @@ export class Tasks {
       next: (data) => {
         console.log("TAREAS RECIBIDAS:", data);  // ← AÑADE ESTO
         this.tasks = data;
+
+        //Pasa las tareas al servicio para que busque fechas próximas
+        this.notifService.checkDeadlines(this.tasks);
+
         this.loading.set(false); // Desactivar loading al recibir respuesta (éxito o error)
-        this.SlowServerMessage.set(false); // <-- Añade esto para ocultar el aviso si ya hay datos
         
 
-      // 🔥 sincronizar columnas
-      this.pendingTasks = this.tasks.filter(t => t.status === 'PENDING');
-      this.doneTasks    = this.tasks.filter(t => t.status === 'DONE');
-      },
-      error: () => {
-        this.errorMessage = 'No se pudieron cargar las tareas.';
-        this.loading.set(false); // Desactivar loading al recibir respuesta (éxito o error)
-        this.SlowServerMessage.set(false); // <-- Añade esto para ocultar el aviso en caso de error
-      }
-    });
-  }
+        // 🔥 sincronizar columnas
+        this.pendingTasks = this.tasks.filter(t => t.status === 'PENDING');
+        this.doneTasks    = this.tasks.filter(t => t.status === 'DONE');
+        },
+        error: () => {
+          this.errorMessage = 'No se pudieron cargar las tareas.';
+          this.loading.set(false); // Desactivar loading al recibir respuesta (éxito o error)
+        }
+      });
+    }
 
   // Agrega una nueva tarea y descripción, prioridad, fecha límite y categoría
   addTask() { 
@@ -343,6 +337,15 @@ export class Tasks {
   // Cierra la sesión del usuario y redirige a la página de login
   logout() {
   // lógica de cerrar sesión
+  }
+
+  // Función para calcular si está vencida (se usa en el HTML del padre)
+  checkIfOverdue(deadline: string | Date | undefined): boolean {
+    if (!deadline) return false;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Solo comparamos fechas, no horas
+    const taskDate = new Date(deadline);
+    return taskDate < today;
   }
   
 }

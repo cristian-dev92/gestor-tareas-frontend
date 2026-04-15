@@ -17,16 +17,16 @@
 
 .task-card strong {
   font-size: 16px;
-  color: #111827;
+  color: #141822;
 }
 
 .task-card p {
   margin: 4px 0 8px;
-  color: #4b5563;
+  color: #131416;
 }
 
 .task-card small {
-  color: #6b7280;
+  color: #121416;
 }
 
 .add-subtask {
@@ -68,18 +68,18 @@
 }
 
 .priority.high {
-  background: #fee2e2;
-  color: #b91c1c;
+  background: #a10707;
+  color: #ffffff;
 }
 
 .priority.medium {
-  background: #fef3c7;
-  color: #b45309;
+  background: #e77103;
+  color: #ffffff;
 }
 
 .priority.low {
-  background: #dcfce7;
-  color: #15803d;
+  background: #03ee55;
+  color: #ffffff;
 }
 
 .category-tag {
@@ -92,22 +92,22 @@
 }
 
 .category-tag.Trabajo {
-  background: #dbeafe;
-  color: #1e40af;
+  background: #ebcbeb;
+  color: #294dc5;
 }
 
 .category-tag.Personal {
-  background: #fce7f3;
-  color: #9d174d;
+  background: #ebcbeb;
+  color: #2e770c;
 }
 
 .category-tag.Estudios {
-  background: #ede9fe;
+  background: #ebcbeb;
   color: #5b21b6;
 }
 
 .category-tag.Urgente {
-  background: #fee2e2;
+  background: #ebcbeb;
   color: #b91c1c;
 }
 
@@ -123,6 +123,14 @@
   opacity: 1;
 }
 
+/* --- AJUSTES MODO OSCURO PARA TASK-CARD --- */
+
+:host-context(.dark-theme) .task-card {
+  background: #323438 !important; /* Gris oscuro para la tarjeta */
+  border-color: #444 !important;    /* Borde más suave */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
 /* TÍTULO DE LA TAREA */
 :host-context(.dark-theme) .task-card strong {
   color: var(--text-primary);
@@ -131,6 +139,16 @@
 /* DESCRIPCIÓN DE LA TAREA */
 :host-context(.dark-theme) .task-card p {
   color: var(--text-secondary);
+}
+
+/* Fecha y textos pequeños */
+:host-context(.dark-theme) .task-card small {
+  color: #ffffff !important;
+}
+
+/* Icono de arrastrar */
+:host-context(.dark-theme) .drag-handle {
+  color: #ffffff;
 }
 
 /* SUBTAREAS */
