@@ -10,46 +10,61 @@ Este repositorio contiene el frontend desarrollado con **Angular**, totalmente i
 
 ## 🚀 Características principales
 
-- 🔐 Autenticación de usuarios (login y registro)
-- 👤 Gestión de perfil (editar usuario, cambiar contraseña)
-- 📝 CRUD completo de tareas
-- 🎨 UI moderna con diseño profesional (inspirado en Linear / Vercel)
-- 📱 Diseño responsive
-- 🔄 Integración con API REST (Spring Boot)
+- 🔐 **Autenticación:** Registro, login y persistencia de sesión mediante JWT.
+- 📋 **Tablero Kanban:** Organización de tareas por estados (Pendiente, En Proceso, Completado).
+- 🔔 **Sistema de Alertas:** Notificaciones visuales para tareas que vencen en las próximas 48 horas.
+- 📅 **Control de Vencimientos:** Indicadores visuales automáticos para tareas atrasadas.
+- 👤 **Gestión de perfil:** Edición de datos de usuario y personalización.
+- 🌓 **Modo Adaptativo:** Interfaz optimizada para una experiencia visual profesional.
 
 ---
 
 ## 🛠️ Tecnologías utilizadas
 
-- **Angular**
+- **Angular** (Standalone Components & Signals)
 - **TypeScript**
-- **HTML5 / CSS3**
-- **Angular Router**
-- **JWT Authentication**
-- **Servicios y Guards**
-- **Netlify / Vercel (opcional para despliegue)**
+- **Angular CDK** (Drag & Drop functionality)
+- **RxJS** (Gestión de flujos de datos)
+- **JWT Authentication** & **Guards** de navegación.
+- **HTML5 / CSS3** (Variables dinámicas y diseño responsive)
+- **Render / Vercel** (opcional para despliegue)
 
 ---
 
 ## 📦 Instalación y ejecución
 
-Clona el repositorio:
+1.  **Clonar el repositorio:**
 
-``bash
+```bash
 git clone https://github.com/tuusuario/taskflow-frontend.git
-cd taskflow-frontend´´
+cd taskflow-frontend
+```
 
-Instala dependencias:
+2.  **Instalar dependencias:**
 
-npm install
+```bash
+    npm install
+```
 
-Ejecuta el proyecto:
+3.  **Ejecutar el servidor de desarrollo:**
 
-ng serve
+```bash
+    ng serve
+```
+    La aplicación estará disponible en: `http://localhost:4200`
 
-El frontend estará disponible en:
+## 🗂️ Estructura del Proyecto (Key Folders)
 
-http://localhost:4200
+```text
+src/app/
+├── layout/             # Estructuras de página 
+├── pages/              # Vistas principales (home, login, profile, register, tasks)
+├── services/           # Lógica de negocio (auth, notification, task)
+├── task-card/          # Vista de tarjetas 
+├── environmnets/       # URL para conectar con el backend en producción
+├── app.config.ts       # Configuracion principal
+├── app.routes.ts       # Definición de rutas y navegación     
+└── auth.interceptor.ts # Gestión centralizada de tokens JWT y Guards para usuarios autenticados
 
 📄 Licencia
 
