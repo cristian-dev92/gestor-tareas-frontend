@@ -8,6 +8,16 @@ Este repositorio contiene el frontend desarrollado con **Angular**, totalmente i
 
 ---
 
+## 🌐 Demo pública
+
+Frontend desplegado en Vercel.
+
+El backend está en Render y puede tardar 40–60 segundos en despertar en la primera carga.
+
+🔗 Demo: <https://gestor-tareas-frontend-eight.vercel.app/>
+
+---
+
 ## 🚀 Características principales
 
 - 🔐 **Autenticación:** Registro, login y persistencia de sesión mediante JWT.
