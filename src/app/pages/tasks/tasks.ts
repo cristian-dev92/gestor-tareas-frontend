@@ -8,6 +8,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDragMove } from '@a
 import { ActivatedRoute } from '@angular/router';
 import { signal } from '@angular/core';
 import { NotificationService } from '../../services/notification';
+import { UiService } from '../../services/ui.service';
 
 
 @Component({
@@ -36,9 +37,12 @@ export class Tasks {
   // Mantenemos el loading para el estado de la UI, pero quitamos SlowServerMessage
   loading = signal(true);
   
-  constructor(private taskService: TaskService, 
+  constructor(
+    private taskService: TaskService, 
     private route: ActivatedRoute,
-    private notifService: NotificationService) {}
+    private notifService: NotificationService,
+    private uiService: UiService
+  ) {}
   
   ngOnInit() {
      // Scroll automático si hay fragmento (#kanban-section)
@@ -77,7 +81,7 @@ export class Tasks {
         this.doneTasks    = this.tasks.filter(t => t.status === 'DONE');
         },
         error: () => {
-          this.errorMessage = 'No se pudieron cargar las tareas.';
+          this.uiService.mostrarToast('No se pudieron cargar las tareas', 'error');
           this.loading.set(false); // Desactivar loading al recibir respuesta (éxito o error)
         }
       });
@@ -107,7 +111,7 @@ export class Tasks {
         this.loadTasks();
       },
       error: () => {
-        this.errorMessage = 'No se pudo crear la tarea.';
+        this.uiService.mostrarToast('No se pudo crear la tarea', 'error');
       }
     });
   }
@@ -119,7 +123,7 @@ export class Tasks {
         this.loadTasks();
       },
       error: () => {
-        this.errorMessage = 'No se pudo borrar la tarea.';
+        this.uiService.mostrarToast('No se pudo borrar la tarea', 'error');
       }
     });
   }
@@ -139,7 +143,7 @@ export class Tasks {
         this.loadTasks(); // refresca la lista
     },
     error: () => {
-      this.errorMessage = 'No se pudo actualizar la tarea.';
+      this.uiService.mostrarToast('No se pudo actualizar la tarea', 'error');
     }
    });
   }
@@ -156,7 +160,7 @@ export class Tasks {
         this.loadTasks(); // refresca la lista para mostrar el nuevo estado
       },
       error: () => {
-        this.errorMessage = 'No se pudo cambiar el estado de la tarea.';
+        this.uiService.mostrarToast('No se pudo cambiar el estado de la tarea', 'error');
       }
     });
   }
@@ -232,7 +236,7 @@ export class Tasks {
         this.loadTasks();
       },
       error: () => {    
-       this.errorMessage = 'No se pudo agregar la subtarea.';
+       this.uiService.mostrarToast('No se pudo agregar la subtarea', 'error');
       }
     });
   }
@@ -244,7 +248,7 @@ export class Tasks {
         this.loadTasks();
       },
       error: () => {
-        this.errorMessage = 'No se pudo cambiar el estado de la subtarea.';
+        this.uiService.mostrarToast('No se pudo cambiar el estado de la subtarea', 'error');
       }
    });
    }
@@ -256,7 +260,7 @@ export class Tasks {
         this.loadTasks();
       },
       error: () => {
-        this.errorMessage = 'No se pudo borrar la subtarea.';
+        this.uiService.mostrarToast('No se pudo borrar la subtarea', 'error');
       }
     });
   }

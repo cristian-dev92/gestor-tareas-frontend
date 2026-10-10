@@ -1,1 +1,7 @@
+<!-- Contenedor flotante del Toast (Signals) -->
+@if (uiService.toast(); as t) {
+  <div class="custom-toast" [ngClass]="t.tipo">
+    <span>{{ t.texto }}</span>
+  </div>
+}
 <router-outlet></router-outlet>

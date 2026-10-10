@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { AuthService } from '../../services/auth';
 import { FormsModule } from '@angular/forms';
+import { UiService } from '../../services/ui.service';
 
 @Component({
   selector: 'app-profile',
@@ -23,9 +24,11 @@ export class Profile implements OnInit {
   newPassword = '';
   confirmPassword = '';
 
-  constructor(private authservice: AuthService, 
+  constructor(
+    private authservice: AuthService, 
     private router: Router, 
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private uiService: UiService
   ) {}
 
   ngOnInit() {
@@ -51,11 +54,17 @@ export class Profile implements OnInit {
         //¡FORZAR DETECCIÓN DE CAMBIOS AQUÍ!
         this.cdr.detectChanges();
       },
-      error: () => console.error('No se pudo cargar el perfil')
+      error: () => this.uiService.mostrarToast('No se pudo cargar el perfil', 'error')
     });
   }
 
   enableEdit() {
+    // Bloqueo si es el usuario demo
+    if (this.user?.username === 'demo') {
+      this.uiService.mostrarToast('El usuario demo es de solo lectura y no se puede modificar.', 'warning');
+      return;
+    }
+
     this.editMode = true;
     this.editedUsername = this.user.username;
     this.editedEmail = this.user.email;
@@ -73,7 +82,7 @@ export class Profile implements OnInit {
 
   saveChanges() {
     if (this.newPassword && this.newPassword !== this.confirmPassword) {
-      alert('Las contraseñas no coinciden');
+      this.uiService.mostrarToast('Las contraseñas no coinciden', 'warning');
       return;
     }
 
@@ -105,8 +114,15 @@ export class Profile implements OnInit {
 
         //Forzar refresco tras actualizar
         this.cdr.detectChanges();
+        this.uiService.mostrarToast('¡Perfil actualizado con éxito!', 'success');
        },
-      error: () => alert("No se pudo actualizar el perfil")
+      error: (err) => {
+        if (err.status === 403) {
+          this.uiService.mostrarToast('El usuario demo es de solo lectura y no se puede modificar.', 'warning');
+        } else {
+          this.uiService.mostrarToast('No se pudo actualizar el perfil', 'error');
+        }
+      }
     });
   }
 }

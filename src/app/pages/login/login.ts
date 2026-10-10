@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { UiService } from '../../services/ui.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,11 @@ export class Login {
   password: string = '';
   errormessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    private uiService: UiService
+  ) {}
 
   onLogin() {
     const credentials = { 
@@ -47,7 +52,7 @@ export class Login {
         });
       },
       error: () => {
-        this.errormessage = 'Username or password is incorrect. Please try again.';
+        this.uiService.mostrarToast('Nombre o contraseña incorrecto pruebe otra vez', 'error');
       }
     });
   }
