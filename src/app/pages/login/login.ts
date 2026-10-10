@@ -27,17 +27,14 @@ export class Login {
     this.executeLogin(credentials);
   }
 
-  // Método dedicado para el Acceso Rápido Demo
+  // Acceso Rápido Demo: Envía las credenciales fijas directamente sin requerir otro clic
   loginDemo() {
-    this.username = 'demo';
-    this.password = 'demo1234';
-    
-    const credentials = { 
-      username: this.username, 
-      password: this.password 
+    const demoCredentials = { 
+      username: 'demo', 
+      password: 'demo1234' 
     };
 
-    this.executeLogin(credentials);
+    this.executeLogin(demoCredentials);
   }
 
   private executeLogin(credentials: any) {
