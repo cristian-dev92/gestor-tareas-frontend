@@ -24,14 +24,31 @@ export class Login {
       password: this.password 
     };
 
+    this.executeLogin(credentials);
+  }
+
+  // Método dedicado para el Acceso Rápido Demo
+  loginDemo() {
+    this.username = 'demo';
+    this.password = 'demo1234';
+    
+    const credentials = { 
+      username: this.username, 
+      password: this.password 
+    };
+
+    this.executeLogin(credentials);
+  }
+
+  private executeLogin(credentials: any) {
     this.authService.login(credentials).subscribe({
       next: (response) => {
-        localStorage.clear(); //Borra el token viejo antes de intentar generar uno nuevo
+        localStorage.clear(); // Borra el token viejo antes de intentar generar uno nuevo
         this.authService.saveToken(response.token);
         this.router.navigate(['/tasks']).then(() => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    },
+        });
+      },
       error: () => {
         this.errormessage = 'Username or password is incorrect. Please try again.';
       }
