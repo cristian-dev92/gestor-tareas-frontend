@@ -18,16 +18,6 @@ export const appConfig: ApplicationConfig = {
 
     provideHttpClient(withInterceptorsFromDi()),
 
-    // 🚀 Añadimos las animaciones y la configuración de los Toastrs aquí
-    provideAnimations(),
-    provideToastr({
-      timeOut: 3500,
-      positionClass: 'toast-bottom-right',
-      preventDuplicates: true,
-      progressBar: true,
-      closeButton: true
-    }),
-
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
@@ -35,11 +25,4 @@ export const appConfig: ApplicationConfig = {
     }
   ]
 };
-function provideAnimations(): import("@angular/core").Provider | import("@angular/core").EnvironmentProviders {
-  throw new Error('Function not implemented.');
-}
-
-function provideToastr(arg0: { timeOut: number; positionClass: string; preventDuplicates: boolean; progressBar: boolean; closeButton: boolean; }): import("@angular/core").Provider | import("@angular/core").EnvironmentProviders {
-  throw new Error('Function not implemented.');
-}
 
