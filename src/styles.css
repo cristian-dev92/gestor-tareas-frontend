@@ -65,8 +65,9 @@ body {
 
 .custom-toast {
   position: fixed;
-  bottom: 24px;
+  top: 90px;
   right: 24px;
+  max-width: 340px;
   padding: 14px 20px;
   border-radius: 8px;
   color: #fff;

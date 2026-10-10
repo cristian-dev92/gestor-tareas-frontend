@@ -60,7 +60,7 @@ export class Profile implements OnInit {
 
   enableEdit() {
     // Bloqueo si es el usuario demo
-    if (this.user?.username === 'demo') {
+    if (this.user?.username === 'demo' || this.editedUsername === 'demo') {
       this.uiService.mostrarToast('El usuario demo es de solo lectura y no se puede modificar.', 'warning');
       return;
     }

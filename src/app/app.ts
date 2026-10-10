@@ -7,7 +7,7 @@ import { UiService } from './services/ui.service';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, RouterModule, CommonModule],
-  template: `<router-outlet></router-outlet>`
+  templateUrl: './app.html'
 })
 export class App {
   constructor(public uiService: UiService) {}
